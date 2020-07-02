@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "data": "Data Security",
+        "src": "https://www.aeroadmin.com/images/security-shield.png"
+    },
+    {
+        "id": 2,
+        "data": "Minimum Requirements To Work",
+        "src": "https://cloud-about.ru/wp-content/uploads/2019/02/cloud-3.png"
+    },
+    {
+        "id": 3,
+        "data": "Agile implementation of new features",
+        "src": "https://zenway.ru/uploads/04_12/netek_001.png"
+    },
+    {
+        "id": 4,
+        "data": "Flexible Business Infrastructure",
+        "src": "https://static.tildacdn.com/tild3734-3330-4233-b062-323032663039/project_1.png"
+    },
+    {
+        "id": 5,
+        "data": "Tech support",
+        "src": "https://hover.com.ua/images/load/ac9eda7ed245ede6d48082b8d4112df1.png"
+    },
+    {
+        "id": 6,
+        "data": "Team of experts",
+        "src": "https://static-s.aa-cdn.net/img/gp/20600004211945/-TY7DQw_ZhdoXBtn9hoVtlKuO7Ay9P6rcuuCbfgXt04UriWTqdd5akf9obcRu57Lqdg=w300?v=1"
+    }
+]

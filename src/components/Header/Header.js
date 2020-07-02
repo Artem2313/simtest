@@ -23,11 +23,15 @@ export default class Header extends Component {
 
   render() {
     const { sideDrawerOpen } = this.state;
+    const { language } = this.props;
     return (
       <div>
-        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
+        <Toolbar
+          language={language}
+          drawerClickHandler={this.drawerToggleClickHandler}
+        />
         {sideDrawerOpen && <BackDrop click={this.backDropClickHandler} />}
-        <SideDrawer show={sideDrawerOpen} />
+        <SideDrawer language={language} show={sideDrawerOpen} />
       </div>
     );
   }

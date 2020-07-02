@@ -1,12 +1,13 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { titleRUS, nameRUS, emailRUS, phoneRUS, textRUS } from './RUS.json';
+import { titleENG, nameENG, emailENG, phoneENG, textENG } from './ENG.json';
 
 export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      position_id: 1,
       name: '',
       nameError: '',
       email: '',
@@ -33,6 +34,7 @@ export default class Register extends Component {
   validate = () => {
     let isError = false;
     const { name, email, phone, photo } = this.state;
+    const { language } = this.props;
 
     const errors = {
       nameError: '',
@@ -43,33 +45,43 @@ export default class Register extends Component {
 
     if (name.length < 6) {
       isError = true;
-      errors.nameError = 'Username needs to be atleast 6 characters long';
+      errors.nameError =
+        language === 'en'
+          ? 'Username needs to be atleast 6 characters long'
+          : 'имя должно состоять минимум из 6 знаков';
     }
 
     if (email.indexOf('@') === -1) {
       isError = true;
-      errors.emailError = 'Requires valid email';
+      errors.emailError =
+        language === 'en' ? 'Requires valid email' : 'Должен содержать @';
     }
 
     if (phone.length !== 13) {
       isError = true;
-      errors.phoneError = 'Number must consists of 13 digits';
+      errors.phoneError =
+        language === 'en'
+          ? 'Number must consists of 13 digits'
+          : 'Должен содержать 13 цифр';
     }
 
     if (phone.slice(0, 4) !== '+380') {
       isError = true;
-      errors.phoneError = 'Number must start with +380';
+      errors.phoneError =
+        language === 'en'
+          ? 'Number must start with +380'
+          : 'Номер должен начинаться с +380';
     }
 
     if (photo === null) {
       isError = true;
-      errors.photoError = 'Needs photo';
-    } else if (photo.type !== 'image/jpeg') {
-      isError = true;
-      errors.photoError = 'Photo needs to be in jpeg format';
+      errors.photoError = language === 'en' ? 'Needs a file' : 'Нужен файл';
     } else if (photo.size > 5242880) {
       isError = true;
-      errors.phoneError = 'Photo should be less than 5 mb';
+      errors.phoneError =
+        language === 'en'
+          ? 'File should be less than 5 mb'
+          : 'Файл должен быть не более 5 мб';
     }
 
     this.setState(prevState => ({
@@ -83,11 +95,10 @@ export default class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { name, position_id, email, phone, photo } = this.state;
+    const { name, email, phone, photo } = this.state;
     const { onRegister } = this.props;
     const data = {
       name,
-      position_id,
       email,
       phone,
       photo,
@@ -99,7 +110,6 @@ export default class Register extends Component {
       onRegister(data);
 
       this.setState({
-        position_id: 1,
         name: '',
         nameError: '',
         email: '',
@@ -115,7 +125,6 @@ export default class Register extends Component {
   render() {
     const {
       name,
-      position_id,
       email,
       phone,
       photo,
@@ -124,20 +133,20 @@ export default class Register extends Component {
       phoneError,
       photoError,
     } = this.state;
-    const { positions, fetchTokenError, fetchPositionsError } = this.props;
+
+    const { language } = this.props;
+
     return (
       <section className="Register-section">
         <div className="Register-section__header">
-          <h1>Register to get a work</h1>
-          <p>
-            Attention! After successful registration and alert, update the list
-            of users in the block from the top
-          </p>
+          <h1>{language === 'en' ? titleENG : titleRUS}</h1>
         </div>
         <form onSubmit={this.handleSubmit} className="Register-section__form">
           <div className="Register-section__form-main">
             <div className="Register-section__form-main-element">
-              <label className="Register-section__form-main-label">Name</label>
+              <label className="Register-section__form-main-label">
+                {language === 'en' ? 'Name' : 'Имя'}
+              </label>
 
               <input
                 type="text"
@@ -145,31 +154,37 @@ export default class Register extends Component {
                 value={name}
                 onChange={this.handleChange}
                 className="Register-section__form-main-input"
-                placeholder="Your name"
+                placeholder={language === 'en' ? 'your name' : 'Ваше имя'}
               />
               <div className="Register-section__after-input">
-                Enter your name
+                {language === 'en' ? nameENG : nameRUS}
               </div>
               {nameError && <div className="error-message">{nameError}</div>}
             </div>
             <div className="Register-section__form-main-element">
-              <label className="Register-section__form-main-label">Email</label>
+              <label className="Register-section__form-main-label">
+                {language === 'en' ? emailENG : emailRUS}
+              </label>
               <input
                 type="email"
                 name="email"
                 value={email}
                 onChange={this.handleChange}
                 className="Register-section__form-main-input"
-                placeholder="Your email"
+                placeholder={
+                  language === 'en' ? 'Email' : 'Введите Вашу эл.почту'
+                }
               />
               <div className="Register-section__after-input">
-                Enter your email
+                {language === 'en'
+                  ? 'Enter your email'
+                  : 'Введите Вашу эл.почту'}
               </div>
               {emailError && <div className="error-message">{emailError}</div>}
             </div>
             <div className="Register-section__form-main-element">
               <label className="Register-section__form-main-label">
-                Phone number
+                {language === 'en' ? phoneENG : phoneRUS}
               </label>
               <input
                 type="text"
@@ -180,47 +195,30 @@ export default class Register extends Component {
                 placeholder="+380"
               />
               <div className="Register-section__after-input">
-                Enter your phone number in open format
+                {language === 'en'
+                  ? 'Enter your phone number'
+                  : 'Введите Ваш номер телефона'}
               </div>
               {phoneError && <div className="error-message">{phoneError}</div>}
             </div>
           </div>
-          <div className="Register-section__select">
-            <label className="Register-section__select-header">
-              Select your position
-            </label>
-            <div>
-              {fetchPositionsError && (
-                <div>{fetchPositionsError} + Positions were not found</div>
-              )}
-              {positions.map(position => (
-                <div
-                  className="Register-section__select-position"
-                  key={position.id}
-                >
-                  <label>
-                    <input
-                      type="radio"
-                      name={position.id}
-                      value={position.id}
-                      checked={position.id === position_id}
-                      onChange={this.handleOptionChange}
-                    />
-                    <span>{position.name}</span>
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
           <div className="Register-section__photo-container">
-            <label className="Register-section__photo-label">Photo</label>
+            <label className="Register-section__photo-label">
+              {language === 'en' ? textENG : textRUS}
+            </label>
             <div className="Register-section__photo-input">
               <label htmlFor="file-upload" className="custom-file-upload">
-                {photo ? photo.name : <span>Upload your photo</span>}
+                {photo ? (
+                  photo.name
+                ) : (
+                  <span>
+                    {language === 'en' ? 'Upload file' : 'Выборать файл'}
+                  </span>
+                )}
               </label>
 
               <label htmlFor="file-upload" className="custom-file-browse">
-                Browse
+                {language === 'en' ? 'Upload' : 'Выбор'}
               </label>
 
               <input
@@ -234,23 +232,14 @@ export default class Register extends Component {
             {photoError && <div className="error-message">{photoError}</div>}
           </div>
           <button type="submit" className="button">
-            Sing up now
+            {language === 'en' ? 'Send' : 'Отправить'}
           </button>
-          {fetchTokenError && <div>{fetchTokenError} + TokenError</div>}
         </form>
       </section>
     );
   }
 }
 
-Register.defaultProps = {
-  fetchTokenError: '',
-  fetchPositionsError: '',
-};
-
 Register.propTypes = {
   onRegister: PropTypes.func.isRequired,
-  positions: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  fetchTokenError: PropTypes.string,
-  fetchPositionsError: PropTypes.string,
 };

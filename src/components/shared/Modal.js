@@ -7,12 +7,12 @@ export default class Modal extends Component {
   constructor(props) {
     super(props);
 
-    const { title, body, button } = props.message;
+    const { data } = props;
 
     this.state = {
-      title,
-      body,
-      button,
+      title: data.name,
+      body: data.photo.name,
+      button: 'Ok',
     };
   }
 
@@ -40,7 +40,7 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { onHandleModal } = this.props;
+    const { onHandleModal, language } = this.props;
     const { title, body, button } = this.state;
     return (
       <div
@@ -61,7 +61,12 @@ export default class Modal extends Component {
             </button>
           </div>
           <div className="modal__inner">
-            <p className="modal__body">{body}</p>
+            <p className="modal__body">
+              {language === 'en'
+                ? 'Your message has been sent '
+                : 'Ваше сообщение отправлено '}
+              {body}
+            </p>
           </div>
           <div className="modal__inner">
             <button

@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Footer = () => (
+const Footer = ({ language }) => (
   <footer>
-    <p>© abz.agency specially for the test task</p>
+    <p>
+      {language === 'en'
+        ? '© SIM company all rights reserved'
+        : '© SIM company все права защищены'}
+    </p>
   </footer>
 );
 

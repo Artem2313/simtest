@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DrawerToggleButton from '../SideDrawer/DrawerToggleButton';
 import logo from '../../../assets/logo.svg';
 
-const Toolbar = ({ drawerClickHandler }) => (
+const Toolbar = ({ drawerClickHandler, language }) => (
   <header className="toolbar container">
     <nav className="toolbar__navigation">
       <div className="toolbar__logo">
@@ -17,27 +17,22 @@ const Toolbar = ({ drawerClickHandler }) => (
         <ul>
           <li>
             <Link to="About me" spy smooth>
-              About me
+              {language === 'en' ? 'Сloud migration' : 'Облачные сервисы'}
             </Link>
           </li>
           <li>
             <Link to="Requirements" spy smooth>
-              Relationships
-            </Link>
-          </li>
-          <li>
-            <Link to="Requirements" spy smooth>
-              Requirements
+              {language === 'en' ? 'Introduction' : 'Знакомство'}
             </Link>
           </li>
           <li>
             <Link to="Users" spy smooth>
-              Users
+              {language === 'en' ? 'Benefits' : 'Преимущества'}
             </Link>
           </li>
           <li>
             <Link to="Sign up" spy smooth>
-              Sign Up
+              {language === 'en' ? 'Contact us' : 'Связаться с нами'}
             </Link>
           </li>
         </ul>
