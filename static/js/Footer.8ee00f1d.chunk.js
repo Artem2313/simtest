@@ -1,0 +1,2 @@
+(this.webpackJsonptestabz=this.webpackJsonptestabz||[]).push([[2],{47:function(e,t,a){"use strict";a.r(t);var n=a(0),r=a.n(n);t.default=function(e){var t=e.language;return r.a.createElement("footer",null,r.a.createElement("p",null,"en"===t?"\xa9 SIM company all rights reserved":"\xa9 SIM company \u0432\u0441\u0435 \u043f\u0440\u0430\u0432\u0430 \u0437\u0430\u0449\u0438\u0449\u0435\u043d\u044b"))}}}]);
+//# sourceMappingURL=Footer.8ee00f1d.chunk.js.map
